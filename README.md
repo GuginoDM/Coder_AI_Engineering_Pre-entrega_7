@@ -72,43 +72,53 @@ mi-api-agente/
 
 ## Pasos a seguir:
 **Configuración inicial** 
-Renombrar archivo .env.example a .env y configurá las claves
+
+	Renombrar archivo .env.example a .env y configurá las claves
 	LLM_PROVIDER=gemini
 	GOOGLE_API_KEY=tu_api_key_aqui
 	TAVILY_API_KEY=tu_api_key_aqui
 	
 **Despliegue con Docker Compose**
+	
 	docker-compose up --build
 	API REST (FastAPI): http://localhost:8000
 	Dashboard Arize Phoenix: http://localhost:6006
 	
 **Ejecución Local en Entorno Virtual**	
 1. **Iniciar el servidor de Redis:**	
-	-- docker run -d -p 6379:6379 --name redis_agente redis/redis-stack-server:latest
+	
+		-- docker run -d -p 6379:6379 --name redis_agente redis/redis-stack-server:latest
 	
 2. **Crear y activar entorno virtual:**
-	-- python -m venv venv
-	-- venv\Scripts\activate    
+	
+		-- python -m venv venv
+		-- venv\Scripts\activate    
 	
 3. **Instalar dependencias de requirements.txt:**
-	-- pip install -r requirements.txt
+	
+		-- pip install -r requirements.txt
 	
 4. **Iniciar la API FastAPI:** 
-	-- uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+	
+		-- uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 	
 **Guía de Uso de los Endpoints(Windows PowerShell)**
 1. **Crear una nueva tarea (POST /tasks)**
-	$body = '{"query": "Investigar LangGraph en FinTech", "critical": false}'
-	$resp = Invoke-RestMethod -Uri "http://localhost:8000/tasks" -Method Post -ContentType "application/json" -Body $body
-	$resp
+
+		$body = '{"query": "Investigar LangGraph en FinTech", "critical": false}'
+		$resp = Invoke-RestMethod -Uri "http://localhost:8000/tasks" -Method Post -ContentType "application/json" -Body $body
+		$resp
 		 
 2. **Consultar el estado del trabajo (GET /tasks/{job_id})**
-	$jobId = $resp.job_id # Reemplazar por tu ID real si es otra sesión
-	Invoke-RestMethod -Uri "http://localhost:8000/tasks/$jobId" -Method Get
+	
+		$jobId = $resp.job_id # Reemplazar por tu ID real si es otra sesión
+		Invoke-RestMethod -Uri "http://localhost:8000/tasks/$jobId" -Method Get
 	
 3. **Aprobar una tarea pausada por HITL (POST /tasks/{job_id}/approve)**
-	$appr = '{"approved": true, "reason": "Aprobación del operador"}'
-	Invoke-RestMethod -Uri "http://localhost:8000/tasks/$jobId/approve" -Method Post -ContentType "application/json" -Body $appr
+	
+		$appr = '{"approved": true, "reason": "Aprobación del operador"}'
+		Invoke-RestMethod -Uri "http://localhost:8000/tasks/$jobId/approve" -Method Post -ContentType "application/json" -Body $appr
 	 
 **Prueba de Carga y Concurrencia (5 Peticiones Simultáneas)**
+	
 	python test_concurrency.py
