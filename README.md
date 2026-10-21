@@ -52,6 +52,7 @@ graph TD
 ```	
 ---
 ##Estructura del Repositorio 
+```	
 mi-api-agente/
 	├── app/
 	│   ├── main.py            # Endpoints FastAPI
@@ -66,6 +67,7 @@ mi-api-agente/
 	├── docker-compose.yml     # Orquestación de contenedores (API + Redis + Phoenix)
 	├── .env.example           # Plantilla de variables de entorno
 	└── README.md              # Documentación
+```
 ---
 
 ## Pasos a seguir:
