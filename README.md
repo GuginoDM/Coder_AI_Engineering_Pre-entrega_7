@@ -71,7 +71,7 @@ mi-api-agente/
 ---
 
 ## Pasos a seguir:
-** Configuración inicial** 
+**Configuración inicial** 
 Renombrar archivo .env.example a .env y configurá las claves
 	LLM_PROVIDER=gemini
 	GOOGLE_API_KEY=tu_api_key_aqui
